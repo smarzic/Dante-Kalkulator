@@ -8,13 +8,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextNumber"
+    <TextView
+        android:id="@+id/txtResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:ems="10"
-        android:inputType="number" />
+        android:gravity="bottom|right"
+        android:padding="16dp"
+        android:text="123456"
+        android:textSize="60sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
