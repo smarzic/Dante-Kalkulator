@@ -16,7 +16,6 @@
         android:ems="10"
         android:gravity="bottom|right"
         android:padding="16dp"
-        android:text="123456"
         android:textSize="60sp" />
 
     <LinearLayout
