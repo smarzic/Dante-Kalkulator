@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         int buttons[] = {R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9};
-        for(int i = 0; i < buttons.length; i++) {
+        for (int i = 0; i < buttons.length; i++) {
             Button b = findViewById(buttons[i]);
             b.setOnClickListener(onClickListener);
         }
@@ -45,12 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 // pročitati upisani broj, spremiti ga i isprazniti polje
                 TextView textView = findViewById(R.id.txtResult);
                 String currNumber = textView.getText().toString();
-                br1 = Integer.parseInt(currNumber);
+                try {
+                    br1 = Integer.parseInt(currNumber);
+                } catch(Exception e) {
+                    br1 = 0;
+                }
                 textView.setText("");
             }
         };
         int buttonsOp[] = {R.id.btnDivide, R.id.btnMinus, R.id.btnMultiply, R.id.btnPlus};
-        for(int i=0; i < buttonsOp.length; i++) {
+        for (int i = 0; i < buttonsOp.length; i++) {
             Button b = findViewById(buttonsOp[i]);
             b.setOnClickListener(opOnClickListener);
         }
@@ -62,17 +67,27 @@ public class MainActivity extends AppCompatActivity {
                 // pročitati drugi broj
                 TextView textView = findViewById(R.id.txtResult);
                 String currText = textView.getText().toString();
-                int br2 = Integer.parseInt(currText);
+                int br2 = 0;
+                try {
+                    br2 = Integer.parseInt(currText);
+                } catch (Exception e) {
+                    br2 = 0;
+                }
                 // izračunati
                 int result = 0;
-                if(operator.equals("+")) {
+                if (operator.equals("+")) {
                     result = br1 + br2;
-                } else if(operator.equals("-")) {
+                } else if (operator.equals("-")) {
                     result = br1 - br2;
-                } else if(operator.equals("*")) {
+                } else if (operator.equals("*")) {
                     result = br1 * br2;
-                } else if(operator.equals("/")) {
-                    result = br1 / br2;
+                } else if (operator.equals("/")) {
+                    if (br2 == 0) {
+                        Toast.makeText(MainActivity.this, "Dijeljenje s nulom!", Toast.LENGTH_SHORT).show();
+                        result = 0;
+                    } else {
+                        result = br1 / br2;
+                    }
                 }
                 textView.setText(result + "");
             }
